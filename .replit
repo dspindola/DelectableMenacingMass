@@ -1,0 +1,33 @@
+run = "bun --print \"'Hello Sr.'\""
+language = "bun"
+
+onBoot = ["sh", "./setup.sh"]
+
+hidden = [".config", "bun.lockb", ".cache", ".bstack", ".codepark", ".git"]
+
+[nix]
+channel = "unstable"
+
+[env]
+XDG_CONFIG_HOME = "/home/runner/$REPL_SLUG/.config"
+XDG_CACHE_HOME = "/home/runner/$REPL_SLUG/.cache"
+PATH = "/home/runner/$REPL_SLUG/.config/.bun/bin:/home/runner/$REPL_SLUG/.config/npm/node_global/bin:/home/runner/$REPL_SLUG/.config/.proto/bin"
+npm_config_prefix = "/home/runner/$REPL_SLUG/.config/npm/node_global"
+BUN_INSTALL = "/home/runner/$REPL_SLUG/.config/.bun"
+PROTO_HOME = "/home/runner/$REPL_SLUG/.config/.proto"
+
+[packager]
+language = "bun"
+ignoredPaths = [".config", ".git"]
+afterInstall = ["bun pm -g", "bun pm hash-print --all > .config/.bun/hash.txt"]
+
+[packager.features]
+guessImports = true
+packageSearch = true
+
+[deployment]
+deploymentTarget = "static"
+build = []
+run = []
+publicDir = "public"
+preservedSymlinks = []

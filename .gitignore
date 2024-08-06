@@ -1,0 +1,10 @@
+.config
+.cache
+.bstack/cache
+.codepark/cache
+.env
+.env*local
+.bunfig.toml
+.idea
+.vscode
+node_modules
